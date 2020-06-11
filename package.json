@@ -1,0 +1,26 @@
+{
+  "name": "duty-machine-action",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/duty-machine/duty-machine-action.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/duty-machine/duty-machine-action/issues"
+  },
+  "homepage": "https://github.com/duty-machine/duty-machine-action#readme",
+  "dependencies": {
+    "@octokit/rest": "^17.11.0",
+    "dotenv": "^8.2.0",
+    "jsdom": "^16.2.2",
+    "node-fetch": "^2.6.0"
+  },
+  "devDependencies": {}
+}

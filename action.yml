@@ -1,0 +1,5 @@
+name: duty-machine-action
+description: 'save web article as issue'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
