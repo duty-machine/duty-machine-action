@@ -4,6 +4,14 @@
 
 抓取的样例可见：https://github.com/duty-machine/duty-machine/issues?q=label%3Afetched+is%3Aclosed 。
 
+### 这个action支持什么网站？
+
+目前已进行适配的网站：
+* matters.news
+* telegra.ph
+* chinadigitaltimes.net
+* mp.weixin.qq.com
+
 ### 如何配置？
 
 1. 新建一个代码仓库，这个仓库将用来存放抓取到的文件，可以是私有仓库。
