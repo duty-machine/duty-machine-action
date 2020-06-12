@@ -4,6 +4,8 @@
 
 抓取的样例可见：https://github.com/duty-machine/duty-machine/issues?q=label%3Afetched+is%3Aclosed 。
 
+我们同时提供了一个[示例仓库](https://github.com/duty-machine/duty-machine)做公开的备份服务，并配置了一个[在线提交入口](https://archives.duty-machine.now.sh/)供大众免登陆使用。
+
 ### 这个action支持什么网站？
 
 目前已进行适配的网站请见：https://github.com/duty-machine/duty-machine-action/tree/master/websites 。
