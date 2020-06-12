@@ -6,12 +6,23 @@ let querystring = require('querystring')
 module.exports = {
   test(url) {
     let parsed = new URL(url)
-    return parsed.hostname == 'www.weibo.com' && parsed.pathname.startsWith('/ttarticle')
+    return (parsed.hostname == 'www.weibo.com' && parsed.pathname.startsWith('/ttarticle')) ||
+      (parsed.hostname == 'card.weibo.com' && parsed.pathname.startsWith('/article/m/show'))
   },
 
   async process(url) {
     let parsed = new URL(url)
-    let {id} = querystring.parse(parsed.search.replace(/^\?/, ''))
+
+    let id = null
+
+    switch (parsed.hostname) {
+      case 'www.weibo.com':
+        id = querystring.parse(parsed.search.replace(/^\?/, '')).id
+        break
+      case 'card.weibo.com':
+        id = parsed.pathname.match(/\/id\/(\d+)/)[1]
+        break
+    }
 
     let res = await fetch(`https://card.weibo.com/article/m/aj/detail?id=${id}`, {
       headers: {
@@ -30,7 +41,8 @@ module.exports = {
   },
 
   samples: [
-    'https://www.weibo.com/ttarticle/p/show?id=2309404443702348087422'
+    'https://www.weibo.com/ttarticle/p/show?id=2309404443702348087422',
+    'https://card.weibo.com/article/m/show/id/2309404513935859515537?_wb_client_=1'
   ]
 
 }
