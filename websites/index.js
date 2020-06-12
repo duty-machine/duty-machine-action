@@ -1,11 +1,13 @@
-let weixin = require('./weixin')
-let telegraph = require('./telegraph')
-let matters = require('./matters')
-let chinadigitaltimes = require('./chinadigitaltimes')
+let fs = require('fs')
 
-module.exports = {
-  weixin,
-  telegraph,
-  matters,
-  chinadigitaltimes
-}
+let fileNames = fs.readdirSync(`${__dirname}/`)
+
+let websites = fileNames.filter(f => f != 'index.js').map(f => {
+  let name = f.replace(/\.js$/, '')
+  return [name, require(`./${name}`)]
+}).reduce((acc, x) => {
+  acc[x[0]] = Object.assign({}, {name: x[0]}, x[1])
+  return acc
+}, {})
+
+module.exports = websites

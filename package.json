@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test-website": "node test.js test-website",
+    "determine-website": "node test.js determine-website"
   },
   "repository": {
     "type": "git",
