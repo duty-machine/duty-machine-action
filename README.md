@@ -6,11 +6,7 @@
 
 ### 这个action支持什么网站？
 
-目前已进行适配的网站：
-* matters.news
-* telegra.ph
-* chinadigitaltimes.net
-* mp.weixin.qq.com
+目前已进行适配的网站请见：https://github.com/duty-machine/duty-machine-action/tree/master/websites 。
 
 ### 如何配置？
 
@@ -21,3 +17,25 @@
 ### 如何使用？
 
 在代码仓库中新建一个issue，在标题或正文中写入要抓取的微信文章链接，提交即可触发抓取。一般需要一分钟，抓取的过程可以在`Actions`标签页下看到。
+
+### 开发
+
+添加抓取的配置，可以在websites文件夹新建一个文件，文件名将会作为之后引用的网站名。网站配置文件的格式为：
+```
+{
+  test: (string) => boolean, // 给定一个网址，用来检测属不属于当前配置的网站
+  process: (string) => { // 给定一个网址，抓取文章内容，返回值应为一个对象
+    title: string,
+    author: string || null,
+    dom: HTMLElement, // 代表文章内容的jsdom对象
+    date: string || null // 文章在原网站上的日期
+  }
+  samples: Array<string> // 示例网址的链接
+}
+```
+
+测试用命令：
+```bash
+npm run test-website weixin # 使用website配置里的samples进行抓取测试
+npm run determine-website https://mp.weixin.qq.com/s # 确定一个url使用的website
+```
