@@ -10,6 +10,12 @@ module.exports = function({title, author, dom}) {
     mdTitle = strip(title)
   }
 
+  Array.from(dom.querySelectorAll('*')).map(element => {
+    element.removeAttribute('class')
+    element.removeAttribute('id')
+    element.removeAttribute('style')
+  })
+
   let html = dom.innerHTML
   let mdBody = html.split("\n").map(line => strip(line)).join('')
 
