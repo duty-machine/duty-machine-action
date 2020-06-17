@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test-website": "node test.js test-website",
+    "test-website-markdown": "node test.js test-website-markdown",
     "determine-website": "node test.js determine-website"
   },
   "repository": {

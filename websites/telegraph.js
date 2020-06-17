@@ -20,12 +20,6 @@ module.exports = {
     content.querySelector('h1').remove()
     content.querySelector('address').remove()
 
-    Array.from(content.querySelectorAll('img')).map(img => {
-      if (img.src.startsWith('/file')) {
-        img.src = `https://telegra.ph${img.src}`
-      }
-    })
-
     return {
       title,
       author,

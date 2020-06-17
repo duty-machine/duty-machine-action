@@ -1,6 +1,7 @@
 let websites = require('./websites')
 let fetchArticle = require('./src/fetchArticle')
 let determineWebsite = require('./src/determineWebsite')
+let renderToMarkdown = require('./src/renderToMarkdown')
 
 function assertArticleFormat({title, dom}) {
   if (title && dom) {
@@ -18,10 +19,17 @@ async function assertFetch(url) {
   let cmd = process.argv[2]
   switch(cmd) {
     case 'test-website':
-      let website = process.argv[3]
-      let samples = websites[website].samples
+      var website = process.argv[3]
+      var samples = websites[website].samples
       samples.map(async (sample) => {
         console.log(await fetchArticle(sample))
+      })
+      break
+    case 'test-website-markdown':
+      var website = process.argv[3]
+      var samples = websites[website].samples
+      samples.map(async (sample) => {
+        console.log(renderToMarkdown(await fetchArticle(sample)))
       })
       break
     case 'determine-website':

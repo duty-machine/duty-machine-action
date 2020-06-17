@@ -16,6 +16,16 @@ module.exports = function({title, author, dom}) {
     element.removeAttribute('style')
   })
 
+  // update paths in outerHTML to absolute paths
+  Array.from(dom.querySelectorAll('img')).map(img => {
+    img.src = img.src
+  })
+
+  Array.from(dom.querySelectorAll('a')).map(a => {
+    a.href = a.href
+  })
+
+
   let html = dom.innerHTML
   let mdBody = html.split("\n").map(line => strip(line)).join('')
 
