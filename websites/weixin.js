@@ -8,6 +8,22 @@ module.exports = {
     return parsed.hostname == 'mp.weixin.qq.com'
   },
 
+  getPublishTime(document) {
+    let time
+    let timeFound = Array.from(document.querySelectorAll('script')).some(v=>{
+      let m = /var \w+="\d*",\w+="(\d*)",\w+="[\d-]*";/g.exec(v.textContent)
+      if (m) {
+        time = Number.parseInt(m[1])
+      }
+      return !!m
+    })
+    if (!timeFound) {
+      return
+    } else {
+      return time
+    }
+  },
+
   async process(url) {
     let res = await fetch(url)
     let html = await res.text()
@@ -16,6 +32,7 @@ module.exports = {
     let title = document.querySelector('#activity-name').textContent
     let author = document.querySelector('#js_name').textContent
     let content = document.querySelector('#js_content')
+    let publishTime = this.getPublishTime(document)
 
     Array.from(content.querySelectorAll('img')).map(img => {
       if (img.dataset.src) {
@@ -26,6 +43,7 @@ module.exports = {
     return {
       title,
       author,
+      publishTime,
       dom: content
     }
 
