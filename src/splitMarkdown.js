@@ -5,6 +5,7 @@ function strip(str) {
 
 module.exports = function(md, maxlen=65535) {
   let mdarray = []
+  console.log(md.length)
   if (md.length < maxlen){
     mdarray[0] = md 
   }else{
