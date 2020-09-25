@@ -8,6 +8,7 @@ module.exports = async function fetchArticle(url) {
   let escaped = new URL(url).href
   let website = determineWebsite(url)
   if (website) {
+    console.log(escaped)
     let article = await website.process(escaped)
 
     let dom = article.dom
