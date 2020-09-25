@@ -33,12 +33,14 @@ async function performTasks() {
         body: mdarray[0]
       })
       for (i=1;i<mdarray.length;i++){
-        await octokit.issues.createComment({
-          owner: OWNER,
-          repo: REPO,
-          issue_number: issue.number,
-          body: mdarray[i]
-        })
+        if (mdarray[i].length < 65536){
+          await octokit.issues.createComment({
+            owner: OWNER,
+            repo: REPO,
+            issue_number: issue.number,
+            body: mdarray[i]
+          })
+        }
       }
       await octokit.issues.update({
         owner: OWNER,
