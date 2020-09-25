@@ -28,6 +28,7 @@ module.exports = {
 
   async process(url) {
     let res = await fetch(url)
+    console.log(res.status)
     let html = await res.text()
     let document = new JSDOM(html).window.document
 
