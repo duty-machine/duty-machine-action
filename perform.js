@@ -2,6 +2,7 @@
 let { Octokit } = require('@octokit/rest')
 let fetchArticle = require('./src/fetchArticle')
 let renderToMarkdown = require('./src/renderToMarkdown')
+let splitMarkdown = require('./src/splitMarkdown')
 
 require('dotenv').config()
 
@@ -23,12 +24,22 @@ async function performTasks() {
   let promises = data.map(async (issue) => {
     try {
       let articleData = await fetchArticle(issue.body || issue.title)
+      let md = renderToMarkdown(articleData)
+      let mdarray = splitMarkdown(md)
       await octokit.issues.createComment({
         owner: OWNER,
         repo: REPO,
         issue_number: issue.number,
-        body: renderToMarkdown(articleData)
+        body: mdarray[0]
       })
+      for (i=1;i<mdarray.length;i++){
+        await octokit.issues.createComment({
+          owner: OWNER,
+          repo: REPO,
+          issue_number: issue.number,
+          body: mdarray[i]
+        })
+      }
       await octokit.issues.update({
         owner: OWNER,
         repo: REPO,
