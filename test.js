@@ -25,6 +25,13 @@ async function assertFetch(url) {
         console.log(await fetchArticle(sample))
       })
       break
+    case 'test-all-websites':
+      Object.values(websites).map(website => {
+        website.samples.map(async (sample) => {
+          console.log(await fetchArticle(sample))
+        })
+      })
+      break
     case 'test-website-markdown':
       var website = process.argv[3]
       var samples = websites[website].samples
