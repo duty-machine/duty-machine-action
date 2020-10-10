@@ -66,7 +66,7 @@ async function performTasks() {
         state: 'closed',
         labels: ['error']
       })
-      throw error
+      // throw error
     }
   })
 
