@@ -21,6 +21,8 @@ async function performTasks() {
     state: 'open'
   })
 
+  data = data.slice(0,4)
+
   let promises = data.map(async (issue) => {
     try {
       let articleData = await fetchArticle(issue.body || issue.title)
