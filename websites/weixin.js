@@ -7,7 +7,8 @@ module.exports = {
     let parsed = new URL(url)
     let weixin = parsed.hostname == 'mp.weixin.qq.com'
     let weixinArchive = parsed.hostname == 'wechatscope.jmsc.hku.hk'
-    return weixin || weixinArchive
+    let myzaker = parsed.hostname == 'www.myzaker.com'
+    return weixin || weixinArchive || myzaker
   },
 
   getPublishTime(document) {
