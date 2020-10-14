@@ -6,7 +6,7 @@ let querystring = require('querystring')
 module.exports = {
   test(url) {
     let parsed = new URL(url)
-    return (parsed.hostname == 'www.weibo.com' && parsed.pathname.startsWith('/ttarticle')) ||
+    return ((parsed.hostname == 'www.weibo.com' || parsed.hostname == 'weibo.com') && parsed.pathname.startsWith('/ttarticle')) ||
       (parsed.hostname == 'card.weibo.com' && parsed.pathname.startsWith('/article/m/show'))
   },
 
@@ -17,6 +17,7 @@ module.exports = {
 
     switch (parsed.hostname) {
       case 'www.weibo.com':
+      case 'weibo.com':
         id = querystring.parse(parsed.search.replace(/^\?/, '')).id
         break
       case 'card.weibo.com':
@@ -41,6 +42,7 @@ module.exports = {
   },
 
   samples: [
+    'https://weibo.com/ttarticle/p/show?id=2309404559283630244158',
     'https://www.weibo.com/ttarticle/p/show?id=2309404443702348087422',
     'https://card.weibo.com/article/m/show/id/2309404513935859515537?_wb_client_=1'
   ]
