@@ -5,7 +5,7 @@ let { JSDOM } = require('jsdom')
 module.exports = {
   test(url) {
     let parsed = new URL(url)
-    return parsed.hostname == 'mp.weixin.qq.com' || 'wechatscope.jmsc.hku.hk'
+    return parsed.hostname == 'mp.weixin.qq.com'
   },
 
   getPublishTime(document) {
