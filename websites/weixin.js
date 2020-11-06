@@ -5,7 +5,10 @@ let { JSDOM } = require('jsdom')
 module.exports = {
   test(url) {
     let parsed = new URL(url)
-    return parsed.hostname == 'mp.weixin.qq.com'
+    let weixin = parsed.hostname == 'mp.weixin.qq.com'
+    let weixinArchive = parsed.hostname == 'wechatscope.jmsc.hku.hk'
+    let myzaker = parsed.hostname == 'www.myzaker.com'
+    return weixin || weixinArchive || myzaker
   },
 
   getPublishTime(document) {
@@ -26,6 +29,7 @@ module.exports = {
 
   async process(url) {
     let res = await fetch(url)
+    console.log(res.status)
     let html = await res.text()
     let document = new JSDOM(html).window.document
 
