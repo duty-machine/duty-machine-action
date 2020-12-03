@@ -43,10 +43,12 @@ module.exports = {
         }
       })
     } else {
-      title = document.querySelector('meta[property="og:title"]').content
+      title = document.querySelector('meta[property="og:title"]').content.replace(/(\r|\\r)/g,"").replace(/(\n|\\n)/g," ")
       author = document.querySelector('.account_nickname_inner').textContent
       content = document.querySelector('#js_content')
       publishTime = this.getPublishTime(document)
+
+      document.getElementById('js_image_desc').innerHTML = document.querySelector('meta[property="og:title"]').content.replace(/(\r|\\r)/g,"").replace(/(\n|\\n)/g,"<br>").replace(/\s/g,"&nbsp;")
 
       Array.from(content.querySelectorAll('img')).map(img => {
         if (img.dataset.src) {
