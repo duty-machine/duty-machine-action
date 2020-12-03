@@ -38,17 +38,25 @@ module.exports = {
     })
     let json = await res.json()
 
+    let pics
+    if (json.data.pics) {
+      pics = json.data.pics.map(img => img.large.url).map(url => `<p><img src="${url}"></p>`).join('')
+    } else {
+      pics = ''
+    }
+
+
     return {
       title: json.data.status_title,
       author: json.data.user.screen_name,
-      dom: new JSDOM(`<body>${json.data.text}</body>`).window.document.querySelector('body')
+      dom: new JSDOM(`<body>${json.data.text}${pics}</body>`).window.document.querySelector('body')
     }
 
   },
 
   samples: [
     'https://m.weibo.cn/status/4577433632120051',
-    'https://weibo.com/1662030957/JwNl1wAZ4',
+    'https://weibo.com/1662030957/JvRGc4Zpn',
     'https://m.weibo.cn/1662030957/4578161557768666',
     'http://weibointl.api.weibo.com/share/187738226.html?weibo_id=4578161557768666'
   ]
