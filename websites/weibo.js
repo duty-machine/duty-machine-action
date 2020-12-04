@@ -6,7 +6,7 @@ let querystring = require('querystring')
 module.exports = {
   test(url) {
     let parsed = new URL(url)
-    return ((parsed.hostname == 'm.weibo.cn') && (parsed.pathname.startsWith('/status') || parsed.pathname.match(/^\/\d+\/.+/))) ||
+    return ((parsed.hostname == 'm.weibo.cn') && (parsed.pathname.startsWith('/status') || parsed.pathname.startsWith('/detail') || parsed.pathname.match(/^\/\d+\/.+/))) ||
       ((parsed.hostname == 'weibo.com' || parsed.hostname == 'www.weibo.com')) && (parsed.pathname.match(/^\/\d+\/.+/)) ||
       (parsed.hostname == 'weibointl.api.weibo.com')
   },
@@ -19,6 +19,8 @@ module.exports = {
       case 'm.weibo.cn':
         if (parsed.pathname.startsWith('/status')) {
           id = parsed.pathname.match(/\/status\/(\d+)/)[1]
+        } else if (parsed.pathname.startsWith('/detail')) {
+          id = parsed.pathname.match(/\/detail\/(\d+)/)[1]
         } else {
           id = parsed.pathname.match(/\/\d+\/(.+)/)[1]
         }
@@ -58,7 +60,8 @@ module.exports = {
     'https://m.weibo.cn/status/4577433632120051',
     'https://weibo.com/1662030957/JvRGc4Zpn',
     'https://m.weibo.cn/1662030957/4578161557768666',
-    'http://weibointl.api.weibo.com/share/187738226.html?weibo_id=4578161557768666'
+    'http://weibointl.api.weibo.com/share/187738226.html?weibo_id=4578161557768666',
+    'https://m.weibo.cn/detail/4578415652376936'
   ]
 
 }
