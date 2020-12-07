@@ -5,8 +5,14 @@ let fs = require('fs').promises
 let determineWebsite = require('./determineWebsite')
 
 module.exports = async function fetchArticle(url) {
-  let escaped = new URL(url).href
-  let website = determineWebsite(url)
+  let escaped
+  try {
+    escaped = new URL(url).href
+  } catch(e) {
+    escaped = new URL(`https://${url}`).href
+  }
+
+  let website = determineWebsite(escaped)
   if (website) {
     let article = await website.process(escaped)
 

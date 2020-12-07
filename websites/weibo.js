@@ -58,7 +58,7 @@ module.exports = {
 
   samples: [
     'https://m.weibo.cn/status/4577433632120051',
-    'https://weibo.com/1662030957/JvRGc4Zpn',
+    'https://weibo.com/1662030957/JwNl1wAZ4',
     'https://m.weibo.cn/1662030957/4578161557768666',
     'http://weibointl.api.weibo.com/share/187738226.html?weibo_id=4578161557768666',
     'https://m.weibo.cn/detail/4578415652376936'
