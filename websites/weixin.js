@@ -29,6 +29,11 @@ module.exports = {
     let html = await res.text()
     let document = new JSDOM(html).window.document
 
+    return this.processDOM(document)
+
+  },
+
+  processDOM(document) {
     let title, author, content, publishTime
     // two types of weixin article
     if (document.querySelector('#activity-detail')) {
@@ -63,7 +68,6 @@ module.exports = {
       publishTime,
       dom: content
     }
-
   },
 
   samples: [
