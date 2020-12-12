@@ -44,7 +44,7 @@ module.exports = {
   samples: [
     'https://weibo.com/ttarticle/p/show?id=2309404559283630244158',
     'https://www.weibo.com/ttarticle/p/show?id=2309404443702348087422',
-    'https://card.weibo.com/article/m/show/id/2309404513935859515537?_wb_client_=1'
+    'https://card.weibo.com/article/m/show/id/2309404559283630244158?_wb_client_=1'
   ]
 
 }
