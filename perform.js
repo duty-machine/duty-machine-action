@@ -13,6 +13,11 @@ let octokit = new Octokit({
   auth: TOKEN
 })
 
+function checkSubmission(body) {
+  if (body.split("\n").length > 1) return false
+  return true
+}
+
 async function performTasks() {
   let { data } = await octokit.issues.listForRepo({
     owner: OWNER,
@@ -22,7 +27,10 @@ async function performTasks() {
 
   let promises = data.map(async (issue) => {
     try {
-      let articleData = await fetchArticle(issue.body || issue.title)
+      if (!checkSubmission(issue.body)) {
+        throw "Invalid submission"
+      }
+      let articleData = await fetchArticle(issue.body)
       await octokit.issues.createComment({
         owner: OWNER,
         repo: REPO,
