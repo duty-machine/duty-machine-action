@@ -14,7 +14,7 @@ let octokit = new Octokit({
 })
 
 function checkSubmission(body) {
-  if (body.split("\n").length > 1) return false
+  //if (body.split("\n").length > 1) return false
   return true
 }
 
