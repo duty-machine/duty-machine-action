@@ -5,7 +5,7 @@ let { JSDOM } = require('jsdom')
 module.exports = {
   test(url) {
     let parsed = new URL(url)
-    return (parsed.hostname == 'www.douban.com' || parsed.hostname == 'm.douban.com')
+    return (parsed.hostname == 'www.douban.com' || parsed.hostname == 'm.douban.com' || parsed.hostname == 'douban.com')
       && url.match(/\/group\/topic\/(\d+)/)
   },
 
@@ -31,7 +31,8 @@ module.exports = {
   samples: [
     'https://www.douban.com/group/topic/179102648/',
     'https://m.douban.com/group/topic/179102648/',
-    'https://www.douban.com/doubanapp/dispatch?uri=/group/topic/179102648&dt_dapp=1'
+    'https://www.douban.com/doubanapp/dispatch?uri=/group/topic/179102648&dt_dapp=1',
+    'https://douban.com/group/topic/179102648/'
   ]
 
 }
