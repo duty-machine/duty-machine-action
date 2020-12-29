@@ -21,8 +21,10 @@ function checkSubmission(body) {
 
 async function getTasks() {
   if (EVENT) {
+    console.log('getting single task')
     return [JSON.parse(EVENT).issue]
   } else {
+    console.log('getting list of tasks')
     let { data } = await octokit.issues.listForRepo({
       owner: OWNER,
       repo: REPO,
