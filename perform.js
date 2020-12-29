@@ -7,6 +7,7 @@ require('dotenv').config()
 
 let TOKEN = process.env.TOKEN
 let REPOSITORY = process.env.REPOSITORY
+let EVENT = process.env.EVENT
 let [OWNER, REPO] = REPOSITORY.split('/')
 
 let octokit = new Octokit({
@@ -18,14 +19,21 @@ function checkSubmission(body) {
   return true
 }
 
-async function performTasks() {
-  let { data } = await octokit.issues.listForRepo({
-    owner: OWNER,
-    repo: REPO,
-    state: 'open'
-  })
+async function getTasks() {
+  if (EVENT) {
+    return [JSON.parse(EVENT).issue]
+  } else {
+    let { data } = await octokit.issues.listForRepo({
+      owner: OWNER,
+      repo: REPO,
+      state: 'open'
+    })
+    return data
+  }
+}
 
-  let promises = data.map(async (issue) => {
+async function performTasks(list) {
+  let promises = list.map(async (issue) => {
     try {
       if (!checkSubmission(issue.body)) {
         throw "Invalid submission"
@@ -66,4 +74,9 @@ async function performTasks() {
   await Promise.all(promises)
 }
 
-performTasks()
+async function perform() {
+  let tasks = await getTasks()
+  await performTasks(tasks)
+}
+
+perform()
