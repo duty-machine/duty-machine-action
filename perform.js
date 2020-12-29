@@ -25,20 +25,7 @@ async function performTasks() {
     state: 'open'
   })
 
-  let toFetch = data.filter(issue => !issue.labels.includes('fetching'))
-
-  let markPromises = toFetch.map(async (issue) => {
-    await octokit.issues.update({
-      owner: OWNER,
-      repo: REPO,
-      issue_number: issue.number,
-      labels: ['fetching']
-    })
-  })
-
-  await Promise.all(markPromises)
-
-  let promises = toFetch.map(async (issue) => {
+  let promises = data.map(async (issue) => {
     try {
       if (!checkSubmission(issue.body)) {
         throw "Invalid submission"
