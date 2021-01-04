@@ -18,9 +18,9 @@ module.exports = {
     switch (parsed.hostname) {
       case 'm.weibo.cn':
         if (parsed.pathname.startsWith('/status')) {
-          id = parsed.pathname.match(/\/status\/(\d+)/)[1]
+          id = parsed.pathname.match(/\/status\/(.+)/)[1]
         } else if (parsed.pathname.startsWith('/detail')) {
-          id = parsed.pathname.match(/\/detail\/(\d+)/)[1]
+          id = parsed.pathname.match(/\/detail\/(.+)/)[1]
         } else {
           id = parsed.pathname.match(/\/\d+\/(.+)/)[1]
         }
@@ -61,7 +61,8 @@ module.exports = {
     'https://weibo.com/1662030957/JwNl1wAZ4',
     'https://m.weibo.cn/1662030957/4578161557768666',
     'http://weibointl.api.weibo.com/share/187738226.html?weibo_id=4578161557768666',
-    'https://m.weibo.cn/detail/4578415652376936'
+    'https://m.weibo.cn/detail/4578415652376936',
+    'https://m.weibo.cn/status/JBDNxuHz1'
   ]
 
 }
