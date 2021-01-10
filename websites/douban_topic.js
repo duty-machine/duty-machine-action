@@ -16,6 +16,10 @@ module.exports = {
     let html = await res.text()
     let document = new JSDOM(html).window.document
 
+    return this.processDOM(document)
+  },
+
+  processDOM(document) {
     let title = document.querySelector('.article h1').textContent
     let author = document.querySelector('.article span.from a').textContent
     let content = document.querySelector('#link-report .topic-content')
@@ -25,7 +29,6 @@ module.exports = {
       author,
       dom: content
     }
-
   },
 
   samples: [
