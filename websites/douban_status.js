@@ -22,7 +22,17 @@ module.exports = {
   processDOM(document) {
     let title = document.querySelector('h1').textContent
     let author = document.querySelector('a.lnk-people').textContent
-    let content = document.querySelector('.status-saying')
+
+    let content
+    if (document.querySelector('.status-saying')) {
+      content = document.querySelector('.status-saying')
+    } else {
+      Array.from(document.querySelectorAll('.actions')).map(x => x.remove())
+      Array.from(document.querySelectorAll('.others')).map(x => x.remove())
+      content = new JSDOM(`
+        <body>${document.querySelector('blockquote').innerHTML}${document.querySelector('.status-real-wrapper').innerHTML}</body>
+      `).window.document.querySelector('body')
+    }
 
     return {
       title,
