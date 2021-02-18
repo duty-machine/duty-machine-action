@@ -3,7 +3,7 @@ let urlMod = require('url')
 let URL = urlMod.URL
 let fs = require('fs').promises
 let determineWebsite = require('./determineWebsite')
-let defaultSite = require('./../websites/defaultSite')
+let default_site = require('./../websites/default_site')
 
 module.exports = async function fetchArticle(url) {
   let escaped
@@ -15,7 +15,7 @@ module.exports = async function fetchArticle(url) {
 
   let website = determineWebsite(escaped)
   if (!website) {
-    website = defaultSite
+    website = default_site
   }
 
   if (website) {

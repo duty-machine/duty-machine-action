@@ -24,7 +24,6 @@ module.exports = function({title, author, publishTime, dom}) {
   let mdPublishDate = publishTime ? moment(publishTime * 1000).utcOffset(8).format('YYYY-MM-DD') : '';
 
   let html = dom.innerHTML
-  // let mdBody = html.split("\n").map(line => strip(line)).join('')
   let mdBody = turndownService.turndown(html)
 
   if (mdPublishDate) {
