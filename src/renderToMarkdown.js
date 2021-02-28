@@ -26,6 +26,8 @@ module.exports = function({title, author, publishTime, dom}) {
   let html = dom.innerHTML
   let mdBody = turndownService.turndown(html)
 
+  mdBody = mdBody.replace(/@/g, '@ ')
+  
   if (mdPublishDate) {
     return `${mdTitle}\n------\n**${mdPublishDate}**\n${mdBody}`
   } else {
