@@ -23,6 +23,8 @@ module.exports = function({title, author, publishTime, dom}) {
   let html = dom.innerHTML
   let mdBody = html.split("\n").map(line => strip(line)).join('')
 
+  mdBody = mdBody.replace(/@/g, '@ ')
+  
   if (mdPublishDate) {
     return `${mdTitle}\n------\n**${mdPublishDate}**\n${mdBody}`
   } else {
