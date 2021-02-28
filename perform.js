@@ -37,10 +37,10 @@ async function getTasks() {
 async function performTasks(list) {
   let promises = list.map(async (issue) => {
     try {
-      if (!checkSubmission(issue.body)) {
+      if (!checkSubmission(issue.body || issue.title)) {
         throw "Invalid submission"
       }
-      let articleData = await fetchArticle(issue.body)
+      let articleData = await fetchArticle(issue.body || issue.title)
       await octokit.issues.createComment({
         owner: OWNER,
         repo: REPO,
