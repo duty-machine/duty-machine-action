@@ -2,6 +2,7 @@
 let { Octokit } = require('@octokit/rest')
 let fetchArticle = require('./src/fetchArticle')
 let renderToMarkdown = require('./src/renderToMarkdown')
+let fetch = require('node-fetch')
 
 require('dotenv').config()
 
@@ -40,7 +41,9 @@ async function performTasks(list) {
       if (!checkSubmission(issue.body || issue.title)) {
         throw "Invalid submission"
       }
-      let articleData = await fetchArticle(issue.body || issue.title)
+      let url = issue.body || issue.title
+      let resp = await fetch(url)
+      let articleData = await fetchArticle(resp.url)
       await octokit.issues.createComment({
         owner: OWNER,
         repo: REPO,

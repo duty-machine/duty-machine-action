@@ -2,7 +2,7 @@ let fs = require('fs')
 
 let fileNames = fs.readdirSync(`${__dirname}/`)
 
-let websites = fileNames.filter(f => f != 'index.js').map(f => {
+let websites = fileNames.filter(f => f != 'index.js' && f != 'default_site.js').map(f => {
   let name = f.replace(/\.js$/, '')
   return [name, require(`./${name}`)]
 }).reduce((acc, x) => {
