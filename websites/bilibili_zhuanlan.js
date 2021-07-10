@@ -15,7 +15,7 @@ module.exports = {
 
     let title = document.querySelector('h1.title').textContent
     let author = document.querySelector('a.up-name').textContent
-    let content = document.querySelector('div.article-holder')
+    let content = document.querySelector('div.article-content')
 
     return {
       title,
