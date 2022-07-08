@@ -24,7 +24,7 @@
     "article-parser": "^4.2.6",
     "dotenv": "^8.2.0",
     "jsdom": "^16.2.2",
-    "moment": "^2.27.0",
+    "moment": "^2.29.4",
     "node-fetch": "^2.6.0",
     "turndown": "^7.0.0"
   }
